@@ -8,6 +8,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 from src.prompt import *
 import os
+from openai import OpenAI
 
 
 app = Flask(__name__)
@@ -36,7 +37,10 @@ docsearch = PineconeVectorStore.from_existing_index(
 
 retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k":3})
 
-chatModel = ChatOpenAI(model="gpt-4o")
+chatModel = ChatOpenAI(model="openai/gpt-oss-120b",
+                       api_key=OPENAI_API_KEY,
+                       base_url="https://api.groq.com/openai/v1"
+                       )
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system_prompt),
