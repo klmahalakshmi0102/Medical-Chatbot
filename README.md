@@ -92,7 +92,7 @@ open up localhost:
 
 	
 ## 3. Create ECR repo to store/save docker image
-    - Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/medicalbot
+    - Save the URI: 405433716642.dkr.ecr.us-east-1.amazonaws.com/medicalbot
 
 	
 ## 4. Create EC2 machine (Ubuntu) 
@@ -102,17 +102,21 @@ open up localhost:
 	
 	#optinal
 
-	sudo apt-get update -y
+	<!-- sudo apt-get update -y
 
-	sudo apt-get upgrade
+	sudo apt-get upgrade -->
+	sudo yum update -y
+	sudo yum install -y libicu libicu-devel
+	sudo yum install -y dotnet-sdk-6.0
 	
 	#required
 
 	curl -fsSL https://get.docker.com -o get-docker.sh
+	sudo yum install -y docker
 
 	sudo sh get-docker.sh
 
-	sudo usermod -aG docker ubuntu
+	sudo usermod -aG docker ec2-user
 
 	newgrp docker
 	
